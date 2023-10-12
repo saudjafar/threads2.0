@@ -1,6 +1,5 @@
 import { fetchUser, fetchUsers, getActivity } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import { Libre_Caslon_Display } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from 'next/navigation';

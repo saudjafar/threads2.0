@@ -1,3 +1,4 @@
+import React from "react";
 import { ClerkProvider } from '@clerk/nextjs'
 import '../globals.css'
 import type { Metadata } from 'next'
@@ -6,10 +7,11 @@ import Topbar from '../components/shared/Topbar'
 import LeftSidebar from '../components/shared/LeftSidebar'
 import RightSidebar from '../components/shared/RightSidebar'
 import Bottombar from '../components/shared/Bottombar'
+import { dark } from "@clerk/themes";
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Threads 2.0',
   description: 'A Next.js clone of Meta Threads Application',
 }
@@ -20,7 +22,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <Topbar />

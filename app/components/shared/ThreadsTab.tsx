@@ -3,6 +3,33 @@ import { redirect } from "next/navigation";
 import ThreadCard from "../cards/ThreadCard";
 import { fetchCommunityPosts } from "@/lib/actions/community.actions";
 
+interface Result {
+    name: string;
+    image: string;
+    id: string;
+    threads: {
+        _id: string;
+        text: string;
+        parentId: string | null;
+        author: {
+            name: string;
+            image: string;
+            id: string;
+        };
+        community: {
+            id: string;
+            name: string;
+            image: string;
+        } | null;
+        createdAt: string;
+        children: {
+            author: {
+                image: string;
+            };
+        }[];
+    }[];
+}
+
 interface Props {
     currentUserId: string,
     accountId: string,
@@ -11,7 +38,7 @@ interface Props {
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
 
-    let result: any
+    let result: Result;
     //TODO: fetch profile threads
     if (accountType === 'Community') {
         result = await fetchCommunityPosts(accountId);
@@ -36,11 +63,10 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
                         accountType === 'User'
                             ? { name: result.name, image: result.image, id: result.id }
                             : { name: thread.author.name, image: thread.author.image, id: thread.author.id }
-                    } //todo
+                    }
                     community={thread.community} //todo
                     createdAt={thread.createdAt}
                     comments={thread.children}
-                    isComment
                 />
             ))}
         </section>
