@@ -4,6 +4,7 @@ import UserCard from "../cards/UserCard";
 
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { fetchUsers } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
 
 async function RightSidebar() {
     const user = await currentUser();
