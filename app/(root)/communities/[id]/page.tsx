@@ -7,12 +7,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ThreadsTab from "@/app/components/shared/ThreadsTab";
 import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 import UserCard from "@/app/components/cards/UserCard";
+import { redirect } from "next/navigation";
 
 
 async function Page({ params }: { params: { id: string } }) {
     const user = await currentUser();
 
-    if (!user) return null;
+    // if (!user) return null;
+    if (!user) redirect('/sign-in');
+
 
     const communityDetails = await fetchCommunityDetails(params.id);
 
